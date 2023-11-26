@@ -10,6 +10,7 @@ import {
 } from "../components";
 
 export default function Home() {
+  const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
 
   return (
@@ -30,7 +31,15 @@ export default function Home() {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1, padding: SIZES.medium }}>
-          <Welcome />
+          <Welcome
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleClick={() => {
+              if (searchTerm) {
+                router.push(`/search/${searchTerm}`);
+              }
+            }}
+          />
           <Popularjobs />
           <Nearbyjobs />
         </View>
