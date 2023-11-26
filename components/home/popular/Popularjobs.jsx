@@ -13,7 +13,6 @@ import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import { COLORS, SIZES } from "../../../constants";
 import useFetch from "../../../hook/useFetch";
 
-
 const Popularjobs = () => {
   const router = useRouter();
   const { data, loading, error } = useFetch("search", {
@@ -21,7 +20,14 @@ const Popularjobs = () => {
     num_page: 1,
   });
 
-  console.log(data)
+  const [selectedJob, setSelectedJob] = useState();
+
+  const handleCardPress = (item) => {
+    router.push(`/job-details/${item.job_id}`);
+    setSelectedJob(item.job_id);
+  };
+
+  console.log(data);
 
   return (
     <View style={styles.container}>
@@ -40,7 +46,13 @@ const Popularjobs = () => {
         ) : (
           <FlatList
             data={data}
-            renderItem={({ item }) => <PopularJobCard item={item} />}
+            renderItem={({ item }) => (
+              <PopularJobCard
+                item={item}
+                selectedJob={selectedJob}
+                handleCardPress={handleCardPress}
+              />
+            )}
             keyExtractor={(item) => item?.id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
