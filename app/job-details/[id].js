@@ -27,13 +27,29 @@ export default function JobDetails() {
     job_id: params.id,
   });
 
-  // const [activeTab, setActiveTab] = 
-  const [first, setfirst] = useState(second)(tabs[0]);
+  // const [activeTab, setActiveTab] = useState(tabs[0]);
   const [refreshing, setRefreshing] = useState(false);
 
   return (
-    <View>
-      <Text>JobDetails</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+      <Stack.Screen
+        options={{
+          headerStyle: { backgroundColor: COLORS.lightWhite },
+          headerShadowVisible: false,
+          headerBackVisible: false,
+          headerLeft: () => (
+            <ScreenHeaderBtn
+              iconUrl={icons.left}
+              dimension="60%"
+              handlePress={() => router.back()}
+            />
+          ),
+          headerRight: () => (
+            <ScreenHeaderBtn iconUrl={icons.share} dimension="60%" />
+          ),
+          headerTitle: "",
+        }}
+      />
+    </SafeAreaView>
   );
 }
